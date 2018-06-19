@@ -5,6 +5,7 @@ Displays the information in a webpage with Flask and Gunicorn.
 ### 1. Raspberry init
 	sudo apt-get update && sudo apt-get upgrade -y
 	sudo raspi-config
+
 		- expand filesystem
 		- change password
 		- enable ssh
@@ -13,10 +14,15 @@ Displays the information in a webpage with Flask and Gunicorn.
 ### 2. Static IP
 
 	sudo nano /etc/dhcpcd.conf
-		- interface eth0
-		- static ip_address=192.168.1.111/24
-		- static routers=192.168.1.1
-		- static domain_name_servers=192.168.1.1
+
+* **dhcpcd.conf:**
+```
+interface eth0
+static ip_address=192.168.1.111/24
+static routers=192.168.1.1
+static domain_name_servers=192.168.1.1
+```
+
 
 ### 3. Dependency install
 	sudo apt-get install chromium-browser x11-xserver-utils unclutter  libsnmp-dev snmp-mibs-downloader  gcc python-dev python3-dev python3-venv -y
@@ -38,29 +44,32 @@ Displays the information in a webpage with Flask and Gunicorn.
 ### 6. Add to services
 	sudo nano /etc/systemd/system/pagecount.service
 
-```
-[Unit]
-Description=Gunicorn instance to serve pagecount
-After=network.target
+* **pagecount.service:**
 
-[Service]
-User=pi
-Group=pi
-WorkingDirectory=/home/pi/PageCount2
-Environment="PATH=/home/pi/PageCount2/VirtualEnv/bin"
-ExecStart=/home/pi/PageCount2/VirtualEnv/bin/gunicorn --worker-class gevent --timeout 90  --bind 0.0.0.0:8000 wsgi -–workers 2
+	```
+	[Unit]
+	Description=Gunicorn instance to serve pagecount
+	After=network.target
 
-[Install]
-WantedBy=multi-user.target
-```
+	[Service]
+	User=pi
+	Group=pi
+	WorkingDirectory=/home/pi/PageCount2
+	Environment="PATH=/home/pi/PageCount2/VirtualEnv/bin"
+	ExecStart=/home/pi/PageCount2/VirtualEnv/bin/gunicorn --worker-class gevent --timeout 90  --bind 0.0.0.0:8000 wsgi -–workers 2
+
+	[Install]
+	WantedBy=multi-user.target
+	```
+
 
 	sudo systemctl enable pagecount
 	sudo systemctl start pagecount
 
 ### 7. Add to startup
 	sudo nano /etc/rc.local
-
-```bash
+* **rc.local:**
+```
 startx /usr/bin/chromium-browser --kiosk 0.0.0.0:8000 --incognito --window-size=1920,1080 --no-sandbox --noerrdialogs
 python /home/pi/off_switch.py
 ```
