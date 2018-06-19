@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300" rel="stylesheet">
+    <script type="text/javascript" src="{{ url_for('static', filename = 'sse.js') }}"> </script>
+</head>
+<body>
+
+  <table>
+    <tr>
+      <th>
+        <h1>
+        <img src="static/konica_minolta-logo.png" height="60">
+        KONICA MINOLTA
+        </h1>
+      </th>
+      <th>
+      </th>
+    </tr>
+    {% for row in table %}
+      <tr>
+        <td><div class = "names">{{ row.name }}</div></td>
+        <td><div id = "{{ loop.index -1 }}" class = "values"></div> </td>
+      </tr>
+    {% endfor %}
+  </table>
+
+</div>
+</body>
+</html>

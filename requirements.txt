@@ -1,0 +1,15 @@
+click==6.7
+easysnmp==0.2.5
+Flask==0.12.2
+gevent==1.2.2
+greenlet==0.4.12
+gunicorn==19.7.1
+itsdangerous==0.24
+Jinja2==2.9.6
+MarkupSafe==1.0
+ply==3.10
+pyasn1==0.3.6
+pycryptodome==3.4.7
+pysmi==0.1.3
+pysnmp==4.3.9
+Werkzeug==0.12.2
