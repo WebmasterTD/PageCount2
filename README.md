@@ -31,12 +31,9 @@ static domain_name_servers=192.168.1.1
 	sudo apt-get --no-install-recommends install xserver-xorg xserver-xorg-video-fbdev xinit
 
 ### 5. Clone repo / Create VirtualEnv
-	mkdir PageCount2
-	cd PageCount2
-	git init
-	git git remote add origin https://github.com/WebmasterTD/PageCount2
-	git pull origin master
+	git clone https://github.com/WebmasterTD/PageCount2 PageCount2
 
+	cd PageCount2
 	python3 -m venv VirtualEnv
 	source VirtualEnv/bin/activate
 	pip install -r requrements.txt
@@ -63,11 +60,13 @@ static domain_name_servers=192.168.1.1
 	```
 
 
+
 	sudo systemctl enable pagecount
 	sudo systemctl start pagecount
 
 ### 7. Add to startup
 	sudo nano /etc/rc.local
+
 * **rc.local:**
 ```
 startx /usr/bin/chromium-browser --kiosk 0.0.0.0:8000 --incognito --window-size=1920,1080 --no-sandbox --noerrdialogs
