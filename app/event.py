@@ -74,18 +74,14 @@ def deltas_2_values(delta):
     A4 = (delta[0] + delta[2] + delta[4] + delta[6]) - (2 * A3)
     values[0] = (delta[0] + delta[2]) - (2 * (delta[1] + delta[3]))
     values[1] = delta[1] + delta[3]
-    #values[4] = delta[8] + delta[9]
     values[4] = (delta[8] if delta[9] == 0 else delta[9])
     if A4 > 0:
         values[2] = delta[4] + delta[6]
         if delta[10] > 0:
             values[5]= delta[10] - (values[2] // 2 + values[2] % 2)
-            #values[0] = (A4 - 2 * values[5]) % 2 + (delta[12] - delta[11])
             values[0] = (A4 - 2 * values[5]) + (delta[12] - delta[11])
         elif delta[0] > 0 and delta[12] != delta[11]:
-            #values[0] -= delta[11]
             values[0] = delta[12] % delta[11]
-            #values[5] = delta[11]
             values[5] = delta[11] - values[0]
         elif delta[2] != delta[12]:
             values[0] += (delta[12] - delta[11])
