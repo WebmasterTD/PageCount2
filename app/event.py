@@ -1,4 +1,3 @@
-from app import get_ip
 from app import app
 from easysnmp import Session
 from pysnmp.carrier.asynsock.dispatch import AsynsockDispatcher
@@ -6,9 +5,19 @@ from pysnmp.carrier.asynsock.dgram import udp
 import json
 import sys
 from flask import Response
+import configparser
 
-raspberry_ip = get_ip.address()
-printer_ip = '192.168.1.70'
+config = configparser.ConfigParser()
+config.read("config.ini")
+do_logs = config['LOG']['Enabled']
+if do_logs:
+    import logging
+    from datetime import date
+    logging.basicConfig(filename=f'logs/{date.today()}.log', filemode='a', level=logging.INFO)
+
+raspberry_ip = config['IP_ADDRESS']['RaspberryPi']
+printer_ip = config['IP_ADDRESS']['KonicaMinolta']
+
 session = Session(hostname = printer_ip, community='public', version=2)
 init_nums = []
 
@@ -21,10 +30,10 @@ def count():
         notif_Receiver()        #Start notif_Receiver
         new_nums = new_get_values()
         delta_values = delta_from_list(init_nums,new_nums)
-        print(delta_values)
         init_nums = new_nums
         values = deltas_2_values(delta_values)      #Calculate final numbers from raw values
         message = constr_message(values)            #Construct the values into message
+        if do_logs: logging.info(f'{delta_values} | {values}')
         return message
     return Response(event_stream(), mimetype="text/event-stream")
 

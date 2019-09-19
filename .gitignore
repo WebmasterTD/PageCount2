@@ -1,7 +1,9 @@
 <<<<<<< HEAD
 # Compiled source #
 *.pyc
-VirtualEnv/
+venv/
+*.vscode/
+logs/
 
 =======
 # Byte-compiled / optimized / DLL files
@@ -109,4 +111,4 @@ VirtualEnv/
 
 # mypy
 .mypy_cache/
->>>>>>> 660b8b186f92732db9bbd099161b2f16118c3dfa
+
