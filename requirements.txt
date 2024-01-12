@@ -11,7 +11,7 @@ pkg-resources==0.0.0
 ply==3.11
 pyasn1==0.4.7
 pycryptodome==3.19.1
-pycryptodomex==3.9.0
+pycryptodomex==3.19.1
 pysmi==0.3.4
 pysnmp==4.4.11
 Werkzeug==3.0.1
