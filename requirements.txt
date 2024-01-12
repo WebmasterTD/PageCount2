@@ -14,4 +14,4 @@ pycryptodome==3.9.0
 pycryptodomex==3.9.0
 pysmi==0.3.4
 pysnmp==4.4.11
-Werkzeug==2.2.3
+Werkzeug==3.0.1
